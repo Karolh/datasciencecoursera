@@ -1,3 +1,8 @@
+## Part 2 of Quiz week 2 in R Programming 
+## Reads a directory full of files and reports the number of completely observed 
+## cases in each data file
+## Returns: a data.frame where first column is the name of the file and the 
+## second is the number of complete cases.
 complete <- function(directory, id = 1:332) {
     data <- data.frame(nrow = length(id), ncol = 2 )
     rowCount <- 1
