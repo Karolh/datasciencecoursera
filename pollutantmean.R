@@ -1,3 +1,6 @@
+## Part 1 of Week 2 Quiz in R Programming 
+## Calculates the mean of a pollutant (sulfate or nitrate) across a specified 
+## list of monitors
 pollutantmean <- function(directory, pollutant, id = 1:332) {
     csv_data <- c()
     for (index in id){
