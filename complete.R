@@ -9,6 +9,7 @@ complete <- function(directory, id = 1:332) {
         data[rowCount, 2] <- number
         rowCount <- rowCount + 1
     }
+    colnames(data) <- c("id", "nobs")
     data
 }
 
