@@ -6,7 +6,7 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
         } else if (index >= 10 & index < 100){
             index <- paste("0", index, sep = "")
         }
-        file <- paste(directory, index, ".csv", sep = "")
+        file <- paste(directory, "/", index, ".csv", sep = "")
         all_raw_data <- read.csv(file)
         column_data <- all_raw_data[pollutant]
         filtered_data <- column_data[!is.na(column_data)]
