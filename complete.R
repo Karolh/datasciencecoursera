@@ -20,11 +20,6 @@ numberOfGoodCases <- function(allCases){
 }
 
 readDataFile <- function(directory, index) {
-    if (index < 10){
-        index <- paste("00", index, sep = "")
-    } else if (index >= 10 & index < 100){
-        index <- paste("0", index, sep = "")
-    }
-    file <- paste(directory, "/", index, ".csv", sep = "")
+    file <- paste(directory, "/", formatC(index, width = 3, flag = "0"), ".csv", sep = "")
     read.csv(file)
 }
