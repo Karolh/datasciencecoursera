@@ -1,5 +1,5 @@
 complete <- function(directory, id = 1:332) {
-    data <- matrix(nrow = length(id), ncol = 2 )
+    data <- data.frame(nrow = length(id), ncol = 2 )
     rowCount <- 1
     for (index in id){
         allCases <- readDataFile(directory, index)
