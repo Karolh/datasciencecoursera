@@ -13,6 +13,12 @@ best <- function(state, outcome) {
         stop("invalid outcome")
     }
     
+    ## breaking data down to only what we're interested in
+    data <- data[c(2,7,columns[outcome])]
+    ## Now getting the complete cases
+    data <- na.omit(data)
+    data
+    
     ## Return hospital name in that state with the lowest 30-day death
     ## rate
 }
