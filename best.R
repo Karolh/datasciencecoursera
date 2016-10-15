@@ -17,8 +17,13 @@ best <- function(state, outcome) {
     data <- data[c(2,7,columns[outcome])]
     ## Now getting the complete cases
     data <- na.omit(data)
-    data
+    data <- subset(data, State == state)
     
-    ## Return hospital name in that state with the lowest 30-day death
-    ## rate
+    ## Sort the data - first by outcome, then by the name
+    sorted <- arrange(data, data[,3], data[,2])
+    
+    ## Return hospital name in that state with the lowest 30-day death rate
+    ## Convert the result to a character vector
+    as.vector(head(sorted, 1)$Hospital.Name)
+    
 }
