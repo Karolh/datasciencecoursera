@@ -1,15 +1,15 @@
 best <- function(state, outcome) {
     ## Read outcome data
-    data <- read.csv("data/outcome-of-care-measures.csv", na.strings = "Not Available")
+    data <- readData("data/outcome-of-care-measures.csv")
     
     ## Check that state and outcome are valid
     
-    if(!state %in% data$State) {
+    if(!isValid(state, data$State)) {
         stop("invalid state")
     }
     
     columns <- c("heart attack"=11, "heart failure" = 17, "pneumonia" = 23)
-    if (!outcome  %in% names(columns)) {
+    if (!isValid(outcome, names(columns))) {
         stop("invalid outcome")
     }
     
@@ -26,4 +26,11 @@ best <- function(state, outcome) {
     ## Convert the result to a character vector
     as.vector(head(sorted, 1)$Hospital.Name)
     
+}
+isValid <- function(item, c = vector()){
+    item %in% c
+}
+
+readData <- function(file = "data/outcome-of-care-measures.csv"){
+    read.csv(file, na.strings = "Not Available")
 }
