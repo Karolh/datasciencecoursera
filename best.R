@@ -1,4 +1,4 @@
-best <- function(state, outcome) {
+best <- function(state, outcome, index = 1, desc = TRUE) {
     ## Read outcome data
     data <- readData("data/outcome-of-care-measures.csv")
     
@@ -20,13 +20,43 @@ best <- function(state, outcome) {
     data <- subset(data, State == state)
     
     ## Sort the data - first by outcome, then by the name
-    sorted <- arrange(data, data[,3], data[,2])
+    
+    sorted <- if (desc) {
+        data[order(data[,3], data[,1]),]
+    } else {
+        data[order(-data[,3], -data[,1]),]
+    }
     
     ## Return hospital name in that state with the lowest 30-day death rate
     ## Convert the result to a character vector
-    as.vector(head(sorted, 1)$Hospital.Name)
+    as.vector(sorted[index,]$Hospital.Name)
     
 }
+
+## This returns the hostpital for the supplied state and and rank
+## The rank can be "best", "worst" or a number
+## The outcome can be one of:
+##              heart attack 
+##              heart failure
+##              pneumonia
+rankhospital <- function(state, outcome, num = "best") {
+    desc <- TRUE
+    index <- 1
+    if (num == "best"){
+        index <- 1
+    } else if (num == "worst"){
+        index <- 1
+        desc <- FALSE
+    } else {
+        index <- num
+    }
+    
+    best(state, outcome, index, desc)
+
+    ## Retrun hospital name in that state with the given rank 
+    ## 30-day death rate
+}
+
 isValid <- function(item, c = vector()){
     item %in% c
 }
